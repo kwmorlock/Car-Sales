@@ -23,6 +23,10 @@ export const initialState = {
        case "ADD_ADDEDFEATURE":
         console.log(action);
         return state.concat(action.payload);
+        default:
+            return state
+    }
+}
 
 
 
