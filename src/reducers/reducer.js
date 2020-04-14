@@ -1,3 +1,6 @@
+import {ADD_FEATURE, REMOVE_FEATURE} from "../actions/actions";
+
+
 export const initialState = {
 
         additionalPrice: 0,
@@ -20,32 +23,15 @@ export const initialState = {
   const reducer = (state =initialState, action) => {
     switch (action.type) {
     //   case "ADD_TODO":
-       case "ADD_ADDEDFEATURE":
-        console.log(action);
-        return state.concat(action.payload);
+       case ADD_FEATURE:
+        // console.log(action);
+        return {...state,car: {...state.car, features: state.car.features.concat(action.payload)}, additionalPrice: state.additionalPrice + action.payload.price}
+
+        case REMOVE_FEATURE:
+        return {...state,car: {...state.car, features: state.car.features.filter(feature => feature.id !==action.payload.id )}, additionalPrice: state.additionalPrice - action.payload.price}
         default:
             return state
     }
 }
-
-
-
-    // return {
-    //     ...state,
-    //     title: action.payload,
-    //     editing: false
-    //   };
-  
-//       case "MARK_TODO":
-//         return state.map((todo) =>
-//           todo.id === action.payload ? { ...todo, completed: true } : todo
-//         );
-  
-//       case "CLEAR_TODO":
-//         return state.filter((todo) => !todo.completed);
-//       default:
-//         return state;
-//     }
-//   };
   
   export default reducer;
